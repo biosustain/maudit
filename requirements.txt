@@ -1,0 +1,4 @@
+git+git://github.com/biosustain/Maud@master#egg=maud
+arviz>=0.11.2
+plotnine
+matplotlib
