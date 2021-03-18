@@ -2,7 +2,10 @@ import os
 from pathlib import Path
 import typer
 
+app = typer.Typer()
 
+
+@app.command()
 def main(path_to_output_dir: Path):
     """Run maudit: this is the main entrypoint.
 
