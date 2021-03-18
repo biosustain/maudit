@@ -1,20 +1,17 @@
 #%%
-import arviz
+
 from plotnine import *
+import pandas as pd
 
-#%%
-
-dat_ncdf = arviz.from_netcdf('../../data/example_netcdf.ncdf')
-# %%
-
-def plot_var_time_series(ncdf, var_name):
-    lp_df = ncdf.sample_stats[var_name].to_dataframe()
+def plot_var_time_series(dict_of_idata):
+    lp_df = pd.DataFrame({
+        chain: idata.sample_stats["lp"].to_series()
+        for chain, idata in dict_of_idata.items()
+    }).droplevel('chain').rename_axis('chain', axis='columns').stack().rename('lp').reset_index()   
     p = (
-        ggplot(lp_df.reset_index(), aes(x = 'draw', y = var_name, col = 'chain'))
+        ggplot(lp_df, aes(x = 'draw', y = 'lp', color = 'factor(chain)'))
         +geom_line()
     )
     return p
-plot_var_time_series(dat_ncdf, 'n_steps')
+
 #%%
-
-
