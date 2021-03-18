@@ -14,6 +14,7 @@ def plot_var_time_series(ncdf, var_name):
         +geom_line()
     )
     return p
-
-#%%
 plot_var_time_series(dat_ncdf, 'n_steps')
+#%%
+
+
