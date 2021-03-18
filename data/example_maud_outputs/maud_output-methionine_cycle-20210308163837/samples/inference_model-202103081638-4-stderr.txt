@@ -1,0 +1,16 @@
+Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: inference_model_model_namespace::log_prob: conc[sym1__, sym2__] is -1.96937e-35, but must be greater than or equal to 0 (in '/home/nicholas/Maud/src/maud/inference_model.stan', line 146, column 2 to column 44)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+
+Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: inference_model_model_namespace::log_prob: conc[sym1__, sym2__] is -1.54136e-35, but must be greater than or equal to 0 (in '/home/nicholas/Maud/src/maud/inference_model.stan', line 146, column 2 to column 44)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+
+Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+Exception: CVODES: CVode Internal t = 9.89515e-07 and h = 1.04852e-22 are such that t + h = t on the next step. The solver will continue anyway. Error code: 99 (in '/home/nicholas/Maud/src/maud/dbalanced_dt.stan', line 213, column 2, included from
+'/home/nicholas/Maud/src/maud/inference_model.stan', line 5, column 0)
+If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+
