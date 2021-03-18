@@ -1,7 +1,7 @@
 import os
 import typer
 
-from utils import return_dict_of_infd
+from .utils import return_dict_of_infd
 from pathlib import Path
 from maud.io import load_maud_input_from_toml
 
