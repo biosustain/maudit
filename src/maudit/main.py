@@ -1,6 +1,8 @@
 import os
 import typer
 
+from maudit.plotting import plot_var_time_series
+
 from .utils import return_dict_of_infd
 from pathlib import Path
 from maud.io import load_maud_input_from_toml
@@ -27,7 +29,9 @@ def main(path_to_output_dir: Path):
     typer.echo(f"Found csv files: {csvs}")
     mi = load_maud_input_from_toml(ui_path)
     infd_dict = return_dict_of_infd(csvs, mi)
-    print(infd_dict)
+
+    lp_plot = plot_var_time_series(infd_dict)
+    lp_plot.save(filename = 'lp_time_series.png')
 
 
 if __name__ == "__main__":
