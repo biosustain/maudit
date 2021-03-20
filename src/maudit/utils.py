@@ -17,13 +17,18 @@ def return_dict_of_infd(csvs, mi):
         for chain in csvs
         }
 
-def return_pd_var(infd_dict: dict(), var_name: str()):
+def return_pd_var(infd_dict: dict(), var_name: str(), WARMUP_TAG: bool() = False):
     """Returns a df of sample stat variable.
     :params infd_dict: a dictionary of infd objects
     :params var_name: a string indicating the variable of interest
+    :params WARMUP_TAG: indicator of if warmup draws are of interest
     """
+    if WARMUP_TAG is True:
+        sample_stats = "warmup_sample_stats"
+    else:
+        sample_stats = "sample_stats"
     var_dict = {
-            chain: idata.sample_stats[var_name].to_series()
+            chain: idata[sample_stats][var_name].to_series()
             for chain, idata in infd_dict.items()
         }
     var_df = pd.DataFrame(var_dict).droplevel('chain').rename_axis('chain', axis='columns').stack().rename(var_name).reset_index()
