@@ -8,17 +8,23 @@ import pandas as pd
 from maud.analysis import load_infd
 
 def return_dict_of_infd(csvs, mi):
-	"""Return dict of chain with associated infd object.
-	:params csvs: a list of csv file paths
-	:params mi: a MaudInput object
-	"""
-	return {
-		re.split("\.", re.split('-', chain)[-1])[0]: load_infd(chain, mi)
-		for chain in csvs
-		}
+    """Return dict of chain with associated infd object.
+    :params csvs: a list of csv file paths
+    :params mi: a MaudInput object
+    """
+    return {
+        re.split("\.", re.split('-', chain)[-1])[0]: load_infd(chain, mi)
+        for chain in csvs
+        }
 
-def return_step_size(infd):
-	"""Returns a series of step sizes for an infd object.
-	:params infd: an inference data object
-	"""
-	return infd.sample_stats.step_size
+def return_pd_var(infd_dict: dict(), var_name: str()):
+    """Returns a df of sample stat variable.
+    :params infd_dict: a dictionary of infd objects
+    :params var_name: a string indicating the variable of interest
+    """
+    var_dict = {
+            chain: idata.sample_stats[var_name].to_series()
+            for chain, idata in infd_dict.items()
+        }
+    var_df = pd.DataFrame(var_dict).droplevel('chain').rename_axis('chain', axis='columns').stack().rename(var_name).reset_index()
+    return var_df
