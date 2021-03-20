@@ -16,3 +16,9 @@ def return_dict_of_infd(csvs, mi):
 		re.split("\.", re.split('-', chain)[-1])[0]: load_infd(chain, mi)
 		for chain in csvs
 		}
+
+def return_step_size(infd):
+	"""Returns a series of step sizes for an infd object.
+	:params infd: an inference data object
+	"""
+	return infd.sample_stats.step_size
