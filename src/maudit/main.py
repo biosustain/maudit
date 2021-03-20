@@ -31,11 +31,17 @@ def main(path_to_output_dir: Path):
     infd_dict = return_dict_of_infd(csvs, mi)
     lp_pd = return_pd_var(infd_dict, "lp")
     step_size_pd = return_pd_var(infd_dict, "step_size")
+    lp_pd_w = return_pd_var(infd_dict, "lp", True)
+    step_size_pd_w = return_pd_var(infd_dict, "step_size", True)
 
     lp_plot = plot_var_time_series(lp_pd, "lp")
     lp_plot.save(filename = 'lp_time_series.png')
     step_size_plot = plot_var_time_series(step_size_pd, "step_size")
     step_size_plot.save(filename = 'step_size_time_series.png')
+    lp_plot_w = plot_var_time_series(lp_pd_w, "lp")
+    lp_plot_w.save(filename = 'lp_time_series_warmup.png')
+    step_size_plot_w = plot_var_time_series(step_size_pd_w, "step_size")
+    step_size_plot_w.save(filename = 'step_size_time_series_warmup.png')
 
 
 if __name__ == "__main__":
