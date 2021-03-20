@@ -3,7 +3,7 @@ import typer
 
 from maudit.plotting import plot_var_time_series
 
-from .utils import return_dict_of_infd
+from maudit.utils import return_dict_of_infd, return_pd_var
 from pathlib import Path
 from maud.io import load_maud_input_from_toml
 
@@ -29,9 +29,13 @@ def main(path_to_output_dir: Path):
     typer.echo(f"Found csv files: {csvs}")
     mi = load_maud_input_from_toml(ui_path)
     infd_dict = return_dict_of_infd(csvs, mi)
+    lp_pd = return_pd_var(infd_dict, "lp")
+    step_size_pd = return_pd_var(infd_dict, "step_size")
 
-    lp_plot = plot_var_time_series(infd_dict)
+    lp_plot = plot_var_time_series(lp_pd, "lp")
     lp_plot.save(filename = 'lp_time_series.png')
+    step_size_plot = plot_var_time_series(step_size_pd, "step_size")
+    step_size_plot.save(filename = 'step_size_time_series.png')
 
 
 if __name__ == "__main__":
